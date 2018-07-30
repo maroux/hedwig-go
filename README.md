@@ -88,8 +88,8 @@ Next, set up a few configuration settings:
         QueueName:                 "DEV-MYAPP",
         MessageRouting:            map[hedwig.MessageRouteKey]string{
             hedwig.MessageRouteKey{
-                MessageType:    "email.send",
-    		        MessageMajorVersion: 1,
+                MessageType:         "email.send",
+                MessageMajorVersion: 1,
     	      }: "send_email",
         },
         Validator:                 validator,
