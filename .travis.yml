@@ -20,7 +20,7 @@ install:
 - go get -u honnef.co/go/tools/cmd/megacheck
 
 before_script:
-- EXCLUDE_VENDOR=$(find . -not -path "./vendor/*" -name "*.go")
+- EXCLUDE_VENDOR=$(find . -not -path "./vendor/*" -not -path "./test-model-generator-schemas/*" -name "*.go")
 - govendor sync
 - go vet $EXCLUDE_VENDOR
 - misspell -error -locale US *.go

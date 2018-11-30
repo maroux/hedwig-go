@@ -5,7 +5,7 @@
  * Author: Aniruddha Maru
  */
 
-package main
+package hedwig
 
 import (
 	"fmt"
@@ -60,14 +60,14 @@ func TestGenerator(t *testing.T) {
 			defer f.Close()
 			defer os.Remove(f.Name())
 
-			schemaFile := fmt.Sprintf("test-schemas/%s/schema.json", test.dir)
+			schemaFile := fmt.Sprintf("test-model-generator-schemas/%s/schema.json", test.dir)
 			err = generate(schemaFile, "hedwig", f.Name(), []string{})
 			if test.error != "" {
 				assert.EqualError(subT, err, test.error)
 			} else {
 				assert.NoError(subT, err)
 
-				modelsFile := fmt.Sprintf("test-schemas/%s/models.go", test.dir)
+				modelsFile := fmt.Sprintf("test-model-generator-schemas/%s/models.go", test.dir)
 				expected, err := ioutil.ReadFile(modelsFile)
 				require.NoError(subT, err)
 

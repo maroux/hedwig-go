@@ -1,4 +1,4 @@
-package main
+package hedwig
 
 import (
 	"encoding/json"
