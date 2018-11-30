@@ -22,11 +22,13 @@ install:
 before_script:
 - EXCLUDE_VENDOR=$(find . -not -path "./vendor/*" -name "*.go")
 - EXCLUDE_VET=$(find . -not -path "./vendor/*" -not -path "./model-generator/*" -name "*.go")
+- EXCLUDE_TEST_SCHEMAS=$(find ./model-generator -not -path "./test-schemas/*" -name "*.go")
 - govendor sync
 - go vet $EXCLUDE_VET
-- (cd model-generator && go vet $(find . -not -path "./test-schemas/*" -name "*.go"))
+- (cd model-generator && go vet $EXCLUDE_TEST_SCHEMAS)
 - misspell -error -locale US *.go
-- megacheck $EXCLUDE_VENDOR
+- megacheck $EXCLUDE_VET
+- (cd model-generator && megacheck $EXCLUDE_TEST_SCHEMAS)
 - (for file in $EXCLUDE_VENDOR; do diff -u <(echo -n) <(gofmt -d -s $file) || exit 1; done)
 - $(exit $(govendor list -no-status +outside | wc -l))
 
