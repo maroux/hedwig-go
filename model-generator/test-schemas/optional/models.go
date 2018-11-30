@@ -12,7 +12,7 @@ type Vehicle struct {
 
 // TripCreated represents the data for Hedwig message trip_created v1.*
 type TripCreated struct {
-	UserId  string  `json:"user_id,omitempty"`
+	UserID  string  `json:"user_id,omitempty"`
 	Vehicle Vehicle `json:"vehicle"`
 	Vin     string  `json:"vin,omitempty"`
 }

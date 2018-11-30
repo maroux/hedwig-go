@@ -8,8 +8,8 @@ package hedwig
 
 // TripCreatedV1 represents the data for Hedwig message trip_created v1.*
 type TripCreatedV1 struct {
-	UserId    string `json:"user_id"`
-	VehicleId string `json:"vehicle_id"`
+	UserID    string `json:"user_id"`
+	VehicleID string `json:"vehicle_id"`
 	Vin       string `json:"vin,omitempty"`
 }
 
@@ -19,8 +19,8 @@ func NewTripCreatedV1Data() interface{} { return new(TripCreatedV1) }
 
 // TripCreatedV2 represents the data for Hedwig message trip_created v2.*
 type TripCreatedV2 struct {
-	UserId    string `json:"user_id"`
-	VehicleId string `json:"vehicle_id"`
+	UserID    string `json:"user_id"`
+	VehicleID string `json:"vehicle_id"`
 	Vin       string `json:"vin"`
 }
 

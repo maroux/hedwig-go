@@ -8,8 +8,8 @@ package hedwig
 
 // TripCreated represents the data for Hedwig message trip_created v1.*
 type TripCreated struct {
-	UserId    string `json:"user_id"`
-	VehicleId string `json:"vehicle_id"`
+	UserID    string `json:"user_id"`
+	VehicleID string `json:"vehicle_id"`
 	Vin       string `json:"vin"`
 }
 

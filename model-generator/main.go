@@ -30,8 +30,8 @@ func name(id string, majorVersion int, multipleMajorVersions bool) string {
 // toCamel converts a go name for struct, variable, field, ... to appropriate camel case
 func toCamel(s string) string {
 	camel := strcase.ToCamel(s)
-	if camel == "Id" {
-		return "ID"
+	if strings.HasSuffix(camel, "Id") {
+		camel = strings.TrimSuffix(camel, "Id") + "ID"
 	}
 	return camel
 }
