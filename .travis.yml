@@ -21,7 +21,7 @@ install:
 
 before_script:
 - EXCLUDE_VENDOR=$(find . -not -path "./vendor/*" -name "*.go")
-- EXCLUDE_VET=$(find . -not -path "./vendor/*" -not -path "./test-model-generator-schemas/*" -name "*.go")
+- EXCLUDE_VET=$(find . -not -path "./vendor/*" -not -path "./model-generator/*" -name "*.go")
 - govendor sync
 - go vet $EXCLUDE_VET
 - (cd model-generator && go vet $(find . -not -path "./test-schemas/*" -name "*.go"))
