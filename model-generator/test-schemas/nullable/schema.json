@@ -1,0 +1,66 @@
+{
+  "id": "https://hedwig.automatic.com/schema",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Test Schema for Hedwig messages",
+  "schemas": {
+    "trip_created": {
+      "1.*": {
+        "description": "This is a message type",
+        "type": "object",
+        "required": [
+          "vehicle",
+          "user_id",
+          "vin"
+        ],
+        "properties": {
+          "vehicle": {
+            "$ref": "https://hedwig.automatic.com/schema#/definitions/Vehicle"
+          },
+          "user_id": {
+            "$ref": "https://hedwig.automatic.com/schema#/definitions/UserId"
+          },
+          "vin": {
+            "$ref": "https://hedwig.automatic.com/schema#/definitions/VIN"
+          }
+        },
+        "x-versions": [
+          "1.0"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Vehicle": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/VehicleId"
+        }
+      },
+      "required": ["id"]
+    },
+    "VehicleId": {
+      "type": "string",
+      "maxLength": 18,
+      "minLength": 18,
+      "pattern": "^C_"
+    },
+    "DeviceId": {
+      "type": "string",
+      "pattern": "^[a-f0-9]+$",
+      "maxLength": 24,
+      "minLength": 20
+    },
+    "UserId": {
+      "type": ["string", "null"],
+      "maxLength": 18,
+      "minLength": 18,
+      "pattern": "^U_"
+    },
+    "VIN": {
+      "type": "string",
+      "maxLength": 17,
+      "minLength": 17
+    }
+  }
+}

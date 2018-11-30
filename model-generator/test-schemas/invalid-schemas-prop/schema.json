@@ -1,0 +1,38 @@
+{
+  "id": "https://hedwig.automatic.com/schema",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Test Schema for Hedwig messages",
+  "schemas": {
+    "trip_created": {
+      "description": "This is a message type",
+      "type": "object",
+      "required": [
+        "vehicle_id",
+        "user_id",
+        "vin"
+      ],
+      "properties": {
+        "vehicle_id": {
+          "type": "string",
+          "maxLength": 18,
+          "minLength": 18,
+          "pattern": "^C_"
+        },
+        "user_id": {
+          "type": "string",
+          "maxLength": 18,
+          "minLength": 18,
+          "pattern": "^U_"
+        },
+        "vin": {
+          "type": "string",
+          "maxLength": 17,
+          "minLength": 17
+        }
+      },
+      "x-versions": [
+        "1.0"
+      ]
+    }
+  }
+}
