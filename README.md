@@ -145,6 +145,8 @@ And finally, send a message:
     publisher.Publish(context.Background(), msg)
 ```
 
+This library also provides a [Go models generator](https://github.com/Automatic/hedwig-go/releases) that may be used to
+automatically generate Go models based on your JSON schema.
 
 ## Development
 
@@ -180,3 +182,15 @@ We use GitHub issues for tracking bugs and feature requests.
 ### v1.0.0
 
   - Initial version
+
+## How to publish
+
+```sh
+make clean build
+
+cd bin/linux-amd64 && zip hedwig-models-generator-linux-amd64.zip hedwig-models-generator; cd -
+cd bin/darwin-amd64 && zip hedwig-models-generator-darwin-amd64.zip hedwig-models-generator; cd -
+```
+
+Upload to Github and attach the zip files created in above step.
+

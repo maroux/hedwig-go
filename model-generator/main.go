@@ -406,6 +406,9 @@ func generate(schemaFile, packageName, outputFile string, customFormats []string
 		for _, version := range versions {
 			msgSchemaStruct := versionSchemas[version]
 			majorVersion, err := strconv.Atoi(strings.Replace(version, ".*", "", -1))
+			if err != nil {
+				return errors.Wrapf(err, "invalid version: %s", version)
+			}
 
 			schemaURL := fmt.Sprintf("%s/schemas/%s/%s", parsedSchema["id"], msgType, version)
 

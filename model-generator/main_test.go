@@ -63,7 +63,7 @@ func TestGenerator(t *testing.T) {
 			schemaFile := fmt.Sprintf("test-schemas/%s/schema.json", test.dir)
 			err = generate(schemaFile, "hedwig", f.Name(), []string{})
 			if test.error != "" {
-				assert.EqualError(subT, err, test.error)
+				assert.Error(subT, err, test.error)
 			} else {
 				assert.NoError(subT, err)
 
