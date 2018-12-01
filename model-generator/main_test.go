@@ -38,7 +38,7 @@ func TestGenerator(t *testing.T) {
 			dir: "optional",
 		},
 		{
-			dir: "multiple-majors",
+			dir: "multiple-versions",
 		},
 		{
 			dir:   "invalid-jsonschema",

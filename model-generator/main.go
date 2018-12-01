@@ -19,11 +19,8 @@ import (
 )
 
 // name creates the struct name for a given Hedwig message
-func name(id string, majorVersion int, multipleMajorVersions bool) string {
+func name(id string, majorVersion int) string {
 	base := strcase.ToCamel(strings.Replace(id, ".", "_", -1))
-	if !multipleMajorVersions {
-		return base
-	}
 	return fmt.Sprintf("%sV%d", base, majorVersion)
 }
 
@@ -281,9 +278,9 @@ func createGoTypes(
 // properties
 func createGoTypesForMessage(
 	sourceBuilder *strings.Builder, goTypes map[*jsonschema.Schema]string, msgType string, majorVersion int,
-	multipleMajorVersions bool, msgSchema *jsonschema.Schema) (string, error) {
+	msgSchema *jsonschema.Schema) (string, error) {
 
-	msgStructName := name(msgType, majorVersion, multipleMajorVersions)
+	msgStructName := name(msgType, majorVersion)
 	if len(msgSchema.Types) != 0 && (len(msgSchema.Types) != 1 || msgSchema.Types[0] != "object") {
 		return "", errors.Errorf("invalid msg schema with type: %v", msgSchema.Types)
 	} else {
@@ -386,23 +383,6 @@ func generate(schemaFile, packageName, outputFile string, customFormats []string
 		versions := keysGeneric(versionSchemas)
 		sort.Strings(versions)
 
-		majorVersions := make(map[int]int)
-		for version := range versionSchemas {
-
-			majorVersion, err := strconv.Atoi(strings.Replace(version, ".*", "", -1))
-			if err != nil {
-				return errors.Errorf("failed to read schema: bad version: '%s' %s", version, err)
-			}
-
-			if _, ok := majorVersions[majorVersion]; !ok {
-				majorVersions[majorVersion] = 1
-			} else {
-				majorVersions[majorVersion] += 1
-			}
-		}
-
-		multipleMajorVersions := len(majorVersions) > 1
-
 		for _, version := range versions {
 			msgSchemaStruct := versionSchemas[version]
 			majorVersion, err := strconv.Atoi(strings.Replace(version, ".*", "", -1))
@@ -427,8 +407,7 @@ func generate(schemaFile, packageName, outputFile string, customFormats []string
 				return errors.Wrap(err, "failed to read schema")
 			}
 
-			msgStructName, err := createGoTypesForMessage(
-				sourceBuilder, goTypes, msgType, majorVersion, multipleMajorVersions, msgSchema)
+			msgStructName, err := createGoTypesForMessage(sourceBuilder, goTypes, msgType, majorVersion, msgSchema)
 			if err != nil {
 				return err
 			}

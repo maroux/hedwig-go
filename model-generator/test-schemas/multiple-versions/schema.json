@@ -8,12 +8,12 @@
         "description": "This is a message type",
         "type": "object",
         "required": [
-          "vehicle_id",
+          "vehicle",
           "user_id"
         ],
         "properties": {
-          "vehicle_id": {
-            "$ref": "https://hedwig.automatic.com/schema#/definitions/VehicleId"
+          "vehicle": {
+            "$ref": "https://hedwig.automatic.com/schema#/definitions/Vehicle/1.0"
           },
           "user_id": {
             "$ref": "https://hedwig.automatic.com/schema#/definitions/UserId"
@@ -30,13 +30,13 @@
         "description": "This is a message type",
         "type": "object",
         "required": [
-          "vehicle_id",
+          "vehicle",
           "user_id",
           "vin"
         ],
         "properties": {
-          "vehicle_id": {
-            "$ref": "https://hedwig.automatic.com/schema#/definitions/VehicleId"
+          "vehicle": {
+            "$ref": "https://hedwig.automatic.com/schema#/definitions/Vehicle/2.0"
           },
           "user_id": {
             "$ref": "https://hedwig.automatic.com/schema#/definitions/UserId"
@@ -52,11 +52,39 @@
     }
   },
   "definitions": {
+    "Vehicle": {
+      "1.0": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/definitions/VehicleId/1.0"
+          }
+        },
+        "required": ["id"]
+      },
+      "2.0": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/definitions/VehicleId/2.0"
+          }
+        },
+        "required": ["id"]
+      }
+    },
     "VehicleId": {
-      "type": "string",
-      "maxLength": 18,
-      "minLength": 18,
-      "pattern": "^C_"
+      "1.0": {
+        "type": "string",
+        "maxLength": 18,
+        "minLength": 18,
+        "pattern": "^C_"
+      },
+      "2.0": {
+        "type": "string",
+        "maxLength": 26,
+        "minLength": 26,
+        "pattern": "^C_"
+      }
     },
     "DeviceId": {
       "type": "string",
